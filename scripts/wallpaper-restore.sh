@@ -46,4 +46,6 @@ echo ":: Setting wallpaper with source image $wallpaper"
 if [ -f ~/.local/bin/waypaper ]; then
     export PATH=$PATH:~/.local/bin/
 fi
+
+hyprctl hyprpaper wallpaper , "$wallpaper"
 waypaper --wallpaper "$wallpaper"
