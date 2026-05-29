@@ -1,0 +1,7 @@
+require("configs/aesthetics")
+require("configs/autostart")
+require("configs/env")
+require("configs/monitors")
+require("configs/input")
+require("keybindings")
+require("configs/windows")

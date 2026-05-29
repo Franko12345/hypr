@@ -7,7 +7,7 @@
 
 terminate_clients() {
   TIMEOUT=5
-  curl --connect-timeout 0.5 --http0.9 http://ledmesa.local/power?state=off
+  curl --connect-timeout 1 --http0.9 http://ledmesa.local/power?state=off
   # Get a list of all client PIDs in the current Hyprland session
   client_pids=$(hyprctl clients -j | jq -r '.[] | .pid')
 

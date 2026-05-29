@@ -1,9 +1,9 @@
 #!/bin/bash
 #   _____________ __
 #  / ___/_  __/ //_/
-# / (_ / / / / ,<   
-# \___/ /_/ /_/|_|  
-#                   
+# / (_ / / / / ,<
+# \___/ /_/ /_/|_|
+#
 # Source: https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
 
 # Check that settings file exists
@@ -48,6 +48,6 @@ if [ -f ~/.config/hypr/conf/cursor.conf ]; then
 fi
 
 # Update gsettings for open any terminal
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "$terminal"
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal use-generic-terminal-name "true"
-gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings "<Ctrl><Alt>t"
+# gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal "$terminal"
+# gsettings set com.github.stunkymonkey.nautilus-open-any-terminal use-generic-terminal-name "true"
+# gsettings set com.github.stunkymonkey.nautilus-open-any-terminal keybindings "<Ctrl><Alt>t"
