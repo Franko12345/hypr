@@ -12,11 +12,11 @@ hl.workspace_rule({ workspace = "4", monitor = "eDP-1" })
 
 -- Atribuição de Apps a Workspaces
 hl.window_rule({ name = "spotify-ws", match = { class = "Spotify" }, workspace = "2 silent" })
-hl.window_rule({ name = "discord-ws", match = { class = "discord" }, workspace = "2 silent" })
+hl.window_rule({ name = "discord-ws", match = { class = "discord(-canary)?/i" }, workspace = "2 silent" })
 hl.window_rule({ name = "whatsapp-ws", match = { title = "ZapZap" }, workspace = "4 silent" })
-hl.window_rule({ name = "btop-ws", match = { class = terminal, title = "btop" }, workspace = "3 silent" })
-hl.window_rule({ name = "peaclock-ws", match = { class = terminal, title = "peaclock" }, workspace = "3 silent" })
-hl.window_rule({ name = "cava-pos", match = { class = terminal, title = "cava" }, size = "400 18", move = "100% 100%" })
+hl.window_rule({ name = "btop-ws", match = { class = "^("..terminal.."|btop)", title = "btop" }, workspace = "3 silent" })
+hl.window_rule({ name = "peaclock-ws", match = { class = "^("..terminal.."|peaclock)", title = "peaclock" }, workspace = "3 silent" })
+hl.window_rule({ name = "cava-pos", match = { class = "^("..terminal.."|cava)", title = "cava" }, size = "400 18", move = "100% 100%" })
 hl.window_rule({ name = "browsers-ws", match = { class = "^(brave-browser|firefox)" }, workspace = "1 silent" })
 hl.window_rule({ name = "zed", match = { class = "dev.zed.Zed" }, workspace = "1 silent" })
 
@@ -70,6 +70,15 @@ hl.window_rule({
     float = true,
     center = true
 })
+
+hl.workspace_rule({
+    workspace = "3",
+    layout = "master",
+})
+
+hl.config({ master = {mfact = 0.65} })
+
+
 
 ---------------------------------------
 ----      REGRAS DE CAMADA (LAYERS) ----

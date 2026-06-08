@@ -6,6 +6,46 @@
 local terminal = "kitty"
 local scripts = os.getenv("HOME") .. "/.config/ml4w/scripts"
 
+local dashboard_queue = {
+    { class = "btop",       cmd = terminal .. " --class btop -e btop" },
+    { class = "peaclock",   cmd = terminal .. " --class peaclock -e peaclock" },
+    { class = "tmatrix",    cmd = terminal .. " --class tmatrix -e tmatrix -s 30 -f 0.5,0.5 --no-fade -l 1,10 -r 20,30 -c default -t FRANKO" },
+    { class = "cava",       cmd = terminal .. " --class cava -e cava" }
+}
+
+local current_index = 1
+local initial_opening = true
+
+-- Função auxiliar para lançar o próximo app da fila com segurança
+local function launch_app(index)
+    local app = dashboard_queue[index]
+    if app and app.cmd then
+        -- Usando o hl.exec_cmd conforme sua versão
+        hl.exec_cmd(app.cmd, { workspace = "3 silent", no_initial_focus = true })
+    end
+end
+
+hl.on("window.open", function(win_addr)
+    if not initial_opening then return end
+
+    local win = hl.get_window(win_addr)
+
+    -- 1. Verifica se a janela que abriu é a que esperávamos na fila
+    if win and win.class == dashboard_queue[current_index].class then
+
+        -- 2. Incrementa o índice para o PRÓXIMO app
+        current_index = current_index + 1
+
+        -- 3. SÓ executa se ainda houver apps na fila
+        if current_index <= #dashboard_queue then
+            launch_app(current_index)
+        else
+            -- Fim da fila, desliga o monitoramento
+            initial_opening = false
+        end
+    end
+end)
+
 hl.on("hyprland.start", function()
     -- Inicialização do Ambiente e Scripts de Suporte
     hl.exec_cmd(scripts .. "/xdg.sh")
@@ -40,7 +80,7 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd("[workspace 2 silent; no_initial_focus] discord-canary")
 
     hl.exec_cmd("flatpak run com.spotify.Client", { workspace = "2 silent", no_initial_focus = true })
-    hl.exec_cmd("discord-canary", { workspace = "2 silent", no_initial_focus = true })
+    hl.exec_cmd("discord", { workspace = "2 silent", no_initial_focus = true })
 
     -- Workspace 3
 
@@ -49,10 +89,13 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd("[workspace 3 silent; no_initial_focus] " .. terminal .. " -e cava")
     -- hl.exec_cmd("[workspace 3 silent; no_initial_focus] " .. terminal .. " -e peaclock")
 
-    hl.exec_cmd(terminal .. " -e btop", { workspace = "3 silent", no_initial_focus = true })
-    hl.exec_cmd(terminal .. " -e tmatrix -s 30 -f 0.5,0.5 --no-fade -l 1,10 -r 20,30 -c default -t FRANKO", { workspace = "3 silent", no_initial_focus = true })
-    hl.exec_cmd(terminal .. " -e cava", { workspace = "3 silent", no_initial_focus = true })
-    hl.exec_cmd(terminal .. " -e peaclock", { workspace = "3 silent", no_initial_focus = true })
+
+
+    hl.exec_cmd(terminal .. " --class btop -e btop", { workspace = "3 silent", no_initial_focus = true})
+    -- hl.exec_cmd(terminal .. " -e peaclock", { workspace = "3 silent", no_initial_focus = true })
+    -- hl.exec_cmd(terminal .. " -e tmatrix -s 30 -f 0.5,0.5 --no-fade -l 1,10 -r 20,30 -c default -t FRANKO", { workspace = "3 silent", no_initial_focus = true })
+    -- hl.exec_cmd(terminal .. " -e cava", { workspace = "3 silent", no_initial_focus = true })
+
 
     -- Workspace 4
 

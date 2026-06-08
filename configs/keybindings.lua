@@ -59,10 +59,10 @@ hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Mover Janelas (Move or Swap Scripts)
-hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.move({direction = "l"}), move_or_swap_opts)
-hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({direction = "r"}), move_or_swap_opts)
-hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.move({direction = "u"}), move_or_swap_opts)
-hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.move({direction = "d"}), move_or_swap_opts)
+hl.bind(mainMod .. " + CTRL + left",  hl.dsp.window.move({direction = "l"}))
+hl.bind(mainMod .. " + CTRL + right", hl.dsp.window.move({direction = "r"}))
+hl.bind(mainMod .. " + CTRL + up",    hl.dsp.window.move({direction = "u"}))
+hl.bind(mainMod .. " + CTRL + down",  hl.dsp.window.move({direction = "d"}))
 
 
 -- Redimensionamento (Repeating)
